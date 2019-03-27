@@ -27,6 +27,13 @@ public class SpringBootConfigApplicationTests {
     }
 
     @Test
+    public void helloService() {
+        ioc.getBean("helloService");
+        boolean helloSerice = ioc.containsBean("helloService");
+        System.out.println(helloSerice);
+    }
+
+    @Test
     public void contextLoads() {
         System.out.println(person);
     }
