@@ -1,37 +1,42 @@
 package com.zero.bean;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-/**
- * 将配置文件中的每一个属性的值，映射到这个组件中
- * @ConfigurationProperties：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定；
- *      prefix = "person"：配置文件中哪个下面的所有属性进行一一映射
- */
 @Component
-@ConfigurationProperties(prefix = "person")
-public class Person {
+@Validated //不支持校验
+public class Person2 {
 
     /**
-     * @Validated 配合@ConfigurationProperties进行JSR303数据校验
-     * @Email 必须为邮箱格式,该校验必须在@ConfigurationProperties与@Validated在的情况下使用
+     * 相当于
+     * <bean class="Person">
+     *      <property name="lastName" value="字面量/${key}从环境变量,配置文件中获取值/#{SpEL}"></property>
+     * </bean>
      */
-
+    @Email //此处并没有校验邮箱格式
+    @Value("${person.last-name}")//一对一模式，对属性名写法要求严
     private String lastName;
+    @Value("#{11 * 2}")//支持SpEL
     private Integer age;
+    @Value("true")
     private Boolean boss;
     private Date birth;
+    /**
+     * @Value("${person.maps.k1}")
+     * 不支持复杂模式
+     */
     private Map<String,Object> maps;
     private List<Object> lists;
     private Dog dog;
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Person2{" +
                 "lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", boss=" + boss +
