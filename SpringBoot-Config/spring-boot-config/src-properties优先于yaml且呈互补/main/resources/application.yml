@@ -1,0 +1,14 @@
+server:
+  port: 8088
+person:
+  age: 18
+  last-name: zero
+  boss: false
+  birth: 1998/12/12
+  maps: {k1: v1,k2: v2}
+  lists:
+    - zhangsan
+    - lisi
+  dog:
+    name: Cat
+    age: 2
