@@ -1,0 +1,20 @@
+
+server:
+  port: 8089
+spring:
+  profiles:
+    active: prod	#指定环境
+
+---
+server:
+  port: 8088
+spring:
+  profiles: dev	#定义 dev 环境块，相当于新建一个application-dev.properties
+
+
+---
+
+server:
+  port: 8087
+spring:
+  profiles: prod
